@@ -1,13 +1,19 @@
-// IMPORT ROUTER
-const router = require('express').Router()
+// IMPORTS AND VARIABLES
+import express from 'express'
+import User from '../models/user'
+const app = express.Router()
 
 /* -----------------------
   |  STATIC ROUTES BELOW  |
    ----------------------- */
     
 // USERS PAGE
-router.get('/users', (req, res) => {
-    res.send('Hello user')
+app.get('/users', (req, res) => {
+    User.find().then((users) => {
+        res.render('users-show', {
+            users: users
+        })
+    })
 })
 
 /* ---------------------
@@ -15,29 +21,35 @@ router.get('/users', (req, res) => {
    --------------------- */
     
 // CREATE
-router.post('/users/new', (req, res) => {
-    
+app.post('/users/new', (req, res) => {
+    User.create(req.body).then((user) => {
+        res.redirect('/users')
+    }).catch(console.error)
 })
 
 // READ - ALL
-router.get('/users', (req, res) => {
-    
+app.get('/users', (req, res) => {
+    User.find().then((users) => {
+        res.render('users-show', {
+            users: users
+        })
+    }).catch(console.error)
 })
 
 // READ - SINGLE
-router.get('/users/:userId', (req, res) => {
+app.get('/users/:userId', (req, res) => {
     
 })
 
 // UPDATE
-router.put('/users/:userId', (req, res) => {
+app.put('/users/:userId', (req, res) => {
     
 })
 
 // DELETE
-router.delete('/users/:userId', (req, res) => {
+app.delete('/users/:userId', (req, res) => {
     
 })
 
 // EXPORT ROUTES
-module.exports = router
+module.exports = app

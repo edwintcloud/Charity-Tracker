@@ -1,12 +1,15 @@
-// IMPORT ROUTER
-const router = require('express').Router()
+// IMPORTS AND VARIABLES
+import express from 'express'
+import Charity from '../models/charity'
+const app = express.Router()
+
 
 /* -----------------------
   |  STATIC ROUTES BELOW  |
    ----------------------- */
     
 // HOME PAGE
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
     res.render('home')
 })
 
@@ -15,29 +18,29 @@ router.get('/', (req, res) => {
    --------------------- */
     
 // CREATE
-router.post('/users/:userId/charities/new', (req, res) => {
+app.post('/users/:userId/charities/new', (req, res) => {
     
 })
 
 // READ - ALL
-router.get('/users/:userId/charities', (req, res) => {
+app.get('/users/:userId/charities', (req, res) => {
     
 })
 
 // READ - SINGLE
-router.get('/users/:userId/charities/:charityId', (req, res) => {
+app.get('/users/:userId/charities/:charityId', (req, res) => {
     
 })
 
 // UPDATE
-router.put('/users/:userId/charities/:charityId', (req, res) => {
+app.put('/users/:userId/charities/:charityId', (req, res) => {
     
 })
 
 // DELETE
-router.delete('/users/:userId/charities/:charityId', (req, res) => {
+app.delete('/users/:userId/charities/:charityId', (req, res) => {
     
 })
 
 // EXPORT ROUTES
-module.exports = router
+module.exports = app
