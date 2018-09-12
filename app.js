@@ -31,7 +31,7 @@ app.use(routes)
 // MONGOOSE CONNECTION
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/charity-tracker', {
     useNewUrlParser: true
-})
+}).catch(e => { console.log(e) })
 
 // START OUR SERVER
 app.listen(3000, () => {

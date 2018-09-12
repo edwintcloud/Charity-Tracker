@@ -9,7 +9,7 @@ const app = express.Router()
     
 // USERS PAGE
 app.get('/users', (req, res) => {
-    User.find().then((users) => {
+    User.find().then(users => {
         res.render('users-show', {
             users: users
         })
@@ -22,33 +22,39 @@ app.get('/users', (req, res) => {
     
 // CREATE
 app.post('/users/new', (req, res) => {
-    User.create(req.body).then((user) => {
+    User.create(req.body).then(user => {
         res.redirect('/users')
-    }).catch(console.error)
+    }).catch(e => { console.log(e) })
 })
 
 // READ - ALL
 app.get('/users', (req, res) => {
-    User.find().then((users) => {
+    User.find().then(users => {
         res.render('users-show', {
             users: users
         })
-    }).catch(console.error)
+    }).catch(e => { console.log(e) })
 })
 
 // READ - SINGLE
 app.get('/users/:userId', (req, res) => {
-    
+    User.findById(req.params.userId).then(user => {
+        res.send(user)
+    }).catch(e => { console.log(e) })
 })
 
 // UPDATE
 app.put('/users/:userId', (req, res) => {
-    
+    User.findByIdAndUpdate(req.params.userId, req.body).then(user => {
+        res.send(user)
+    }).catch(e => { console.log(e) })
 })
 
 // DELETE
 app.delete('/users/:userId', (req, res) => {
-    
+    User.findByIdAndRemove(req.params.userId).then(user => {
+        res.send('User Removed')
+    }).catch(e => { console.log(e) })
 })
 
 // EXPORT ROUTES

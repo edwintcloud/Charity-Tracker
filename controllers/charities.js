@@ -19,27 +19,37 @@ app.get('/', (req, res) => {
     
 // CREATE
 app.post('/users/:userId/charities/new', (req, res) => {
-    
+    Charity.create(req.body).then(charity => {
+        
+    }).catch(e => { console.log(e) })
 })
 
 // READ - ALL
 app.get('/users/:userId/charities', (req, res) => {
-    
+    Charity.find({ userId: req.params.userId }).then(charities => {
+        
+    }).catch(e => { console.log(e) })
 })
 
 // READ - SINGLE
 app.get('/users/:userId/charities/:charityId', (req, res) => {
-    
+    Charity.findById(req.params.charityId).then(charity => {
+        
+    }).catch(e => { console.log(e) })
 })
 
 // UPDATE
 app.put('/users/:userId/charities/:charityId', (req, res) => {
-    
+    Charity.findByIdAndUpdate(req.params.charityId, req.body).then(charity => {
+        
+    }).catch(e => { console.log(e) })
 })
 
 // DELETE
 app.delete('/users/:userId/charities/:charityId', (req, res) => {
-    
+    Charity.remove(req.params.charityId).then(charity => {
+        
+    }).catch(e => { console.log(e) })
 })
 
 // EXPORT ROUTES
