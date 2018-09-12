@@ -1,0 +1,23 @@
+.jumbotron {
+    margin-bottom: 0!important;
+}
+
+.registration-panel {
+    margin: 3em auto 3em auto!important;
+    width: 60%!important;
+    vertical-align: center!important;
+}
+
+.card-header {
+    text-align: center!important;
+    font-size: 1.3em!important;
+}
+
+.register-form {
+    margin: 0 2em 0 2em!important;
+}
+
+.create-button {
+    padding-left: 2em!important;
+    padding-right: 2em!important;
+}

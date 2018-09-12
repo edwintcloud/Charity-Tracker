@@ -16,6 +16,12 @@ app.get('/users', (req, res) => {
     })
 })
 
+// REGISTER PAGE
+app.get('/users/register', (req, res) => {
+    res.render('users-register')
+})
+
+
 /* ---------------------
   |  CRUD ROUTES BELOW  |
    --------------------- */
