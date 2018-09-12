@@ -13,6 +13,11 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
+// CHARITIES LIST PAGE
+app.get('/charities', (req, res) => {
+    res.render('charities-list')
+})
+
 /* ---------------------
   |  CRUD ROUTES BELOW  |
    --------------------- */
