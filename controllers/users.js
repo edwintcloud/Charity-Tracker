@@ -4,7 +4,7 @@ import User from '../models/user'
 const app = express.Router()
 
 /* -----------------------
-  |  STATIC ROUTES BELOW  |
+  |  AUTH ROUTES BELOW  |
    ----------------------- */
     
 // USERS PAGE
@@ -20,7 +20,6 @@ app.get('/users', (req, res) => {
 app.get('/users/register', (req, res) => {
     res.render('users-register')
 })
-
 
 /* ---------------------
   |  CRUD ROUTES BELOW  |
