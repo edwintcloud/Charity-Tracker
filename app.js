@@ -4,6 +4,10 @@ import exphbs from 'express-handlebars'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import methodOverride from 'method-override'
+import cookieParser from 'cookie-parser'
+import session from 'express-session'
+import passport from 'passport'
+import LocalStrategy from 'passport-local'
 import routes from './routes'
 const app = express()
 
@@ -16,14 +20,14 @@ app.engine('handlebars', exphbs({
 }))
 app.set('view engine', 'handlebars')
 
-// BODY PARSER
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-app.use(bodyParser.json());
-
-// override with POST having ?_method=DELETE
-app.use(methodOverride('_method'))
+//============EXPRESS CONFIGURATION============
+//app.use(cookieParser())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use(methodOverride('_method')) // override with POST having ?_method=DELETE
+//app.use(session({secret: 'fluffybunnies', saveUninitialized: true, resave: true}))
+//app.use(passport.initialize())
+//app.use(passport.session())
 
 // USE OUR ROUTES
 app.use(routes)

@@ -1,3 +1,6 @@
+{{#if user}}
+Hello {{user.firstName}}
+{{else}}
 <div class="jumbotron">
   <h1 class="display-4">Get Started Today!</h1>
   <p class="lead">A simple tool to track the charities you donate to.</p>
@@ -5,3 +8,4 @@
   <p>Create an Account Now</p>
   <a class="btn btn-primary btn-lg" href="/users/register" role="button">Register</a>
 </div>
+{{/if}}

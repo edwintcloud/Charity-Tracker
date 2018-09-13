@@ -29,8 +29,12 @@ app.get('/users/register', (req, res) => {
 // CREATE
 app.post('/users/new', (req, res) => {
     User.create(req.body).then(user => {
-        res.redirect('/users')
-    }).catch(e => { console.log(e) })
+        res.render('charities-show', { user: user})
+        console.log(user)
+    }).catch(err => { 
+        console.log(err)
+        res.status(400).send({ err: err })
+    })
 })
 
 // READ - ALL

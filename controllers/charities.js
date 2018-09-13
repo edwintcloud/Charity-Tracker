@@ -10,7 +10,7 @@ const app = express.Router()
     
 // HOME PAGE
 app.get('/', (req, res) => {
-    res.render('charities-show')
+    res.render('charities-show', { user: req.user})
 })
 
 // CHARITIES LIST PAGE
