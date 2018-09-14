@@ -1,5 +1,7 @@
 {{#if session.userId}}
-Hello {{user.firstName}}
+<div class="jumbotron">
+  <p class="lead" style="text-align:center;">Hello, {{user.firstName}} {{user.lastName}}! 😃</p>
+</div>
 {{else}}
 <div class="jumbotron">
   <h1 class="display-4">Get Started Today!</h1>
