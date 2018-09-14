@@ -35,11 +35,10 @@ app.post('/users/login', (req, res) => {
             if(err) throw err
             if(user) {
                 req.session.userId = user._id
-                res.redirect('/')
+                res.status(200).send()
             }
             if(reason) {
-                console.log(reason)
-                res.redirect('/')
+                res.status(200).send({ reason: reason})
             }
     })
 })

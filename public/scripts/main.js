@@ -1,35 +1,50 @@
 $(document).ready(function() {
     $("#loginModal").on("hidden.bs.modal", function(e) {
         $("#loginForm").trigger("reset")
+        $("#loginInfo").hide()
+        $("#loginInfo").text("")
     })
 })
-function registerUser() {
-    var formElements = document.getElementById("register-form").elements;
+
+function usersLogin() {
+    let formElements = document.getElementById("loginForm").elements;
     var user = {};
-    var formFilled = true,
-        passwordsMatch = false;
     for (var i = 0; i < formElements.length; i++) {
         if (formElements[i].type != "submit") //we dont want to include the submit-buttom
             user[formElements[i].name] = formElements[i].value;
     }
     
-    //==========FORM CHECKS==========
-    for (var value in user) {
-        if(user[value] == "")
-            formFilled = false;
-    }
-    if(!formFilled) {
-        alert("Something was left blank.. how did you do that?!?");
-        return;
-    }
-    if(user['password'] == user['passwordConfirm']) {
-        passwordsMatch = true;
-    } else {
-        alert("The passwords must match!");
-        return;
-    }
+    axios.post("/users/login", user).then(function(res) {
+        if(res.data.reason) {
+            $("#loginPassword").val("")
+            $("#loginInfo").text(res.data.reason)
+            $("#loginInfo").show()
+        } else {
+            $("#loginInfo").hide()
+            window.location.replace("/")
+        }
+    }).catch(e => { console.log(e) })
+}
 
-    axios.post("/users/new", user).then(function(response) {
-        console.log(response)
-    })
+function usersRegister() {
+    let formElements = document.getElementById("loginForm").elements;
+    var user = {};
+    for (var i = 0; i < formElements.length; i++) {
+        if (formElements[i].type != "submit") //we dont want to include the submit-buttom
+            user[formElements[i].name] = formElements[i].value;
+    }
+    
+    axios.post("/users/login", user).then(function(res) {
+        if(res.data.reason) {
+            $("#loginInfo").text(res.data.reason)
+            $("#loginInfo").show()
+            setTimeout(function() {
+                $("#loginInfo").hide()
+                $("#loginInfo").text("")
+            }, 3500)
+        } else {
+            $("#loginInfo").hide()
+            window.location.replace("/")
+        }
+    }).catch(e => { console.log(e) })
 }

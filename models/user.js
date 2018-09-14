@@ -41,14 +41,14 @@ UserSchema.pre('save', function(next) {
 UserSchema.statics.authenticate = function(email, password, next) {
     this.findOne({ email: email }, function(err, user) {
         if(err) return next(err)
-        if(!user) return next(null, null, 'User Not Found')
+        if(!user) return next(null, null, 'Email not found. Are you registered?')
         
         bcrypt.compare(password, user.password, function(err, res) {
             if(err) return next(err)
             if(res) {
                 return next(null, user)
             } else{
-                return next(null, null, 'Invalid Password')
+                return next(null, null, 'Invalid Password. Please try again!')
             }
         })
     })
