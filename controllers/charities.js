@@ -1,6 +1,7 @@
 // IMPORTS AND VARIABLES
 import express from 'express'
 import Charity from '../models/charity'
+import User from '../models/user'
 const app = express.Router()
 
 
@@ -10,7 +11,13 @@ const app = express.Router()
     
 // HOME PAGE
 app.get('/', (req, res) => {
-    res.render('charities-show', { user: req.user})
+    if(req.session.userId) {
+        User.findById(req.session.userId).then(user => {
+            res.render('charities-show', { user: user })
+        }).catch(e => { console.log(e) })
+    } else{
+        res.render('charities-show')
+    }
 })
 
 // CHARITIES LIST PAGE

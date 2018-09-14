@@ -37,5 +37,22 @@ UserSchema.pre('save', function(next) {
     })
 })
 
+// Authenticate input on database
+UserSchema.statics.authenticate = function(email, password, next) {
+    this.findOne({ email: email }, function(err, user) {
+        if(err) return next(err)
+        if(!user) return next(null, null, 'User Not Found')
+        
+        bcrypt.compare(password, user.password, function(err, res) {
+            if(err) return next(err)
+            if(res) {
+                return next(null, user)
+            } else{
+                return next(null, null, 'Invalid Password')
+            }
+        })
+    })
+}
+
 // EXPORT MODEL
 module.exports = mongoose.model('User', UserSchema)

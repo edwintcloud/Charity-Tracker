@@ -16,6 +16,34 @@ app.get('/users', (req, res) => {
     })
 })
 
+//Logout
+app.post('/users/logout', (req, res) => {
+    if(req.session) {
+        req.session.destroy(err => {
+            if(err) {
+                return next(err)
+            } else {
+                return res.redirect('/')
+            }
+        })
+    }
+})
+
+//login
+app.post('/users/login', (req, res) => {
+    User.authenticate(req.body.email, req.body.password, (err, user, reason) => {
+            if(err) throw err
+            if(user) {
+                req.session.userId = user._id
+                res.redirect('/')
+            }
+            if(reason) {
+                console.log(reason)
+                res.redirect('/')
+            }
+    })
+})
+
 // REGISTER PAGE
 app.get('/users/register', (req, res) => {
     res.render('users-register')
@@ -28,11 +56,10 @@ app.get('/users/register', (req, res) => {
 // CREATE
 app.post('/users/new', (req, res) => {
     User.create(req.body).then(user => {
-        res.render('charities-show', { user: user})
-        console.log(user)
+        req.session.userId = user._id
+        res.redirect('/')
     }).catch(err => { 
         console.log(err)
-        res.status(400).send({ err: err })
     })
 })
 

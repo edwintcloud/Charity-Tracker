@@ -1,9 +1,8 @@
-window.onload = function() {
-    document.getElementById("loginModal").addEventListener("hidden.bs.modal", function () {
-        document.getElementById("loginModalEmail").value = "";
-        document.getElementById("loginModalPassword").value = "";
-    });
-};
+$(document).ready(function() {
+    $("#loginModal").on("hidden.bs.modal", function(e) {
+        $("#loginForm").trigger("reset")
+    })
+})
 function registerUser() {
     var formElements = document.getElementById("register-form").elements;
     var user = {};

@@ -13,10 +13,15 @@
                 <a class="nav-link" href="/charities">List of Charities</a>
             </li>
         </ul>
-
+        {{#if session.userId}}
+        <form class="form-inline my-2 my-lg-0" method="post" action="/users/logout">
+            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
+        </form>
+        {{else}}
         <form class="form-inline my-2 my-lg-0" onsubmit="event.preventDefault();window.location.replace('/users');">
             <button class="btn btn-outline-primary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal">Login</button>
         </form>
+        {{/if}}
     </div>
 </nav>
 
@@ -30,19 +35,20 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form id="loginForm" method="post" action="/users/login">
           <div class="form-group">
             <input type="text" class="form-control" id="loginModalEmail" name="email" placeholder="Email" autocomplete="username" required>
           </div>
           <div class="form-group">
             <input type="password" class="form-control" id="loginModalPassword" name="password" placeholder="Password" autocomplete="current-password" required>
           </div>
-        </form>
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" onclick="location.href='/users/register';">Register</button>
-        <button type="button" class="btn btn-primary" onclick="location.href='/';">Login</button>
+        <button type="submit" class="btn btn-primary">Login</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
