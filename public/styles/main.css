@@ -21,3 +21,44 @@
     padding-left: 2em!important;
     padding-right: 2em!important;
 }
+
+.charitiesContainer {
+    margin: 2em;
+}
+
+.cardLeft {
+    margin-left: 2em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.cardRight {
+    margin-right: 2em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.flexrow { 
+  display: flex; 
+  flex-flow: row wrap;
+}
+
+.flexcol {
+  flex: 0 0 50%;
+  display: flex;
+}
+
+.flexcont {
+  box-shadow: 0 0 4px rgba(0,0,0,0.4);
+  flex: 0 0 100%;
+  flex-shrink: 1;
+}
+
+.flextext {
+  display: flex;
+  justify-content: center;
+  font-size: 3em;
+  color: green;
+  flex-shrink: 1;
+  align-items: center;
+}

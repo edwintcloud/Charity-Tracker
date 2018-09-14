@@ -67,3 +67,38 @@ function usersRegister() {
         }
     }).catch(e => { console.log(e) })
 }
+
+function addCharity() {
+    
+    let userId = document.getElementById("userLabel").getAttribute("user-id");
+    let name = $("#addCharityName").val()
+    let amount = $("#addCharityAmount").val()
+    let charity = { name, amount, userId }
+    
+    axios.post("/users/" + userId + "/charities/new", charity).then(function(res) {
+        window.location.replace("/")
+    }).catch(e => { console.log(e) })
+}
+
+function deleteCharity(index) {
+    
+    let userId = document.getElementById("userLabel").getAttribute("user-id");
+    let charityId = document.getElementById(index).getAttribute("charity-id");
+    
+    axios.delete("/users/" + userId + "/charities/" + charityId).then(function(res) {
+        window.location.replace("/")
+    }).catch(e => { console.log(e) })
+}
+
+function updateCharity(index) {
+    
+    let userId = document.getElementById("userLabel").getAttribute("user-id");
+    let charityId = document.getElementById(index).getAttribute("charity-id");
+    let name = $("#" + index + "-name").text()
+    let amount = $("#" + index + "-amount").val()
+    let charity = { name, amount, userId }
+    
+    axios.put("/users/" + userId + "/charities/" + charityId, charity).then(function(res) {
+        window.location.replace("/")
+    }).catch(e => { console.log(e) })
+}

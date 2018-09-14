@@ -13,7 +13,9 @@ const app = express.Router()
 app.get('/', (req, res) => {
     if(req.session.userId) {
         User.findById(req.session.userId).then(user => {
-            res.render('charities-show', { user: user })
+            Charity.find({ userId: user._id }).then(charities => {    
+                res.render('charities-show', { user: user, charities: charities })    
+            })
         }).catch(e => { console.log(e) })
     } else{
         res.render('charities-show')
@@ -32,8 +34,11 @@ app.get('/charities', (req, res) => {
 // CREATE
 app.post('/users/:userId/charities/new', (req, res) => {
     Charity.create(req.body).then(charity => {
-        
-    }).catch(e => { console.log(e) })
+        res.status(200).send({ charity: charity })
+    }).catch(e => { 
+        res.status(200).send({ err: e })
+        console.log(e) 
+    })
 })
 
 // READ - ALL
@@ -53,15 +58,21 @@ app.get('/users/:userId/charities/:charityId', (req, res) => {
 // UPDATE
 app.put('/users/:userId/charities/:charityId', (req, res) => {
     Charity.findByIdAndUpdate(req.params.charityId, req.body).then(charity => {
-        
-    }).catch(e => { console.log(e) })
+        res.status(200).send()
+    }).catch(e => { 
+        res.status(400).send({ err: e })
+        console.log(e) 
+    })
 })
 
 // DELETE
 app.delete('/users/:userId/charities/:charityId', (req, res) => {
-    Charity.remove(req.params.charityId).then(charity => {
-        
-    }).catch(e => { console.log(e) })
+    Charity.findByIdAndRemove(req.params.charityId).then(charity => {
+        res.status(200).send()
+    }).catch(e => { 
+        res.status(400).send({ err: e })
+        console.log(e) 
+    })
 })
 
 // EXPORT ROUTES

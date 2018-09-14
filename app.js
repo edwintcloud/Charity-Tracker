@@ -45,6 +45,24 @@ app.use(function(req, res, next){
         next();
 });
 
+Handlebars.registerHelper("slice8", function (context) {
+    var result = '' + context;
+    return result.slice(-8);
+});
+
+Handlebars.registerHelper("total", function (context) {
+    var result = 0
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2
+    })
+    for(var i in context) {
+        result += Number(context[i].amount)
+    }
+    return formatter.format(result);
+});
+
 // USE OUR ROUTES
 app.use(routes)
   
