@@ -1,14 +1,18 @@
 $(document).ready(function() {
+    //check what page we are on and set navbar accordingly
+    $(document).ready(function() {
+        $('li a.active').removeClass('active');
+        $('a[href="' + location.pathname + '"]').closest('li').addClass('active'); 
+    })
+    
     resetRegisterFields()
     $("#loginModal").on("hidden.bs.modal", function(e) {
         $("#loginForm").trigger("reset")
         $("#loginInfo").hide()
         $("#loginInfo").text("")
     })
-    
-    //Below is code for registration form validation
-    
 })
+
 function resetRegisterFields() {
     $("#registerFormPassword").removeClass("is-invalid")
     $("#registerFormConfirmPassword").removeClass("is-invalid")
@@ -16,10 +20,6 @@ function resetRegisterFields() {
     $("#registerFormEmail").removeClass("is-invalid")
     $("#registerFormEmailInfo").text("")
 }
-
-$('input').bind('input propertychange', function() {
-    comparePasswords()
-});
 
 function usersLogin() {
     let formElements = document.getElementById("loginForm").elements;
