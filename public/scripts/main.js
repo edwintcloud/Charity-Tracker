@@ -98,6 +98,12 @@ function updateCharity(index) {
     let amount = $("#" + index + "-amount").val()
     let charity = { name, amount, userId }
     
+    if(amount <= 0) {
+        alert('Invalid Input')
+        window.location.replace("/")
+        return
+    }
+    
     axios.put("/users/" + userId + "/charities/" + charityId, charity).then(function(res) {
         window.location.replace("/")
     }).catch(e => { console.log(e) })
