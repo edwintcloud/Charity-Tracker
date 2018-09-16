@@ -1,5 +1,6 @@
 // IMPORTS AND VARIABLES
 import express from 'express'
+import request from 'request'
 import Charity from '../models/charity'
 import User from '../models/user'
 const app = express.Router()
@@ -24,7 +25,15 @@ app.get('/', (req, res) => {
 
 // CHARITIES LIST PAGE
 app.get('/charities', (req, res) => {
-    res.render('charities-list')
+    request('https://api.data.charitynavigator.org/v2/Lists?app_id=b78cb105&app_key=f852075432126ebcc982c547c5b0e25e', (err, response, body)=> {
+        if(!err && response.statusCode === 200) {
+            const resBody = JSON.parse(body)
+            res.render('charities-list', { charities: resBody })
+        }else {
+            console.log(err)
+            res.render('charities-list')
+        }
+    })
 })
 
 /* ---------------------

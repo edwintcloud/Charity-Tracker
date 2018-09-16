@@ -62,3 +62,38 @@
   flex-shrink: 1;
   align-items: center;
 }
+
+.apiImg {
+    width: 10em;
+    height: 2em;
+
+}
+.navbar-text {
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+}
+.groupImg {
+    width: 15em;
+    height: 15em;   
+    border-radius: 100%;
+    justify-content: flex-start!important;
+}
+.groupText {
+    display: flex;
+    align-items:center;
+    justify-content: flex-end; 
+    vertical-align: center;
+    font-weight: 500;
+    font-size: 1.2em;
+}
+.groupText a {
+    color: black;
+}
+.groupText a:hover {
+    color: blue;
+    text-decoration: none;
+}
+.groupContainer {
+    display: flex;
+
+}

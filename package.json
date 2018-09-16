@@ -20,7 +20,8 @@
     "handlebars": "^4.0.12",
     "handlebars-intl": "^1.1.2",
     "method-override": "^3.0.0",
-    "mongoose": "^5.2.14"
+    "mongoose": "^5.2.14",
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
