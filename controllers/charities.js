@@ -5,7 +5,6 @@ import Charity from '../models/charity'
 import User from '../models/user'
 const app = express.Router()
 
-
 /* -----------------------
   |  STATIC ROUTES BELOW  |
    ----------------------- */
@@ -32,6 +31,18 @@ app.get('/charities', (req, res) => {
         }else {
             console.log(err)
             res.render('charities-list')
+        }
+    })
+})
+
+app.get('/charities/:id', (req, res) => {
+    request('https://api.data.charitynavigator.org/v2/Lists/' + req.params.id + '?app_id=b78cb105&app_key=f852075432126ebcc982c547c5b0e25e', (err, response, body) => {
+        if(!err && response.statusCode == 200) {
+            const resBody = JSON.parse(body)
+            res.render('charities-list-id', {charities: resBody})
+        } else {
+            console.log(err)
+            res.render('charities-list-id')
         }
     })
 })

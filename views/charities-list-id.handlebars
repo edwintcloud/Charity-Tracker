@@ -1,0 +1,48 @@
+
+
+    {{#unless charities}}
+    <div class="jumbotron">
+        <p class="lead" style="text-align:center;">Oops! We are having trouble retreiving the data.</p>
+    </div>
+    {{/unless}}
+    <div class="card charitiesContainer">
+        <div class="jumbotron">
+            <p class="lead" style="text-align:center;font-size:2em;">{{charities.listName}}</p>
+        </div>
+        <div class="card-body">
+                    <div class="row flexrow">
+                        <div class="col-sm-6 flexcol">
+                          <div class="card cardLeft flexcont">
+                              <div class="card-header">
+                                  About
+                              </div>
+                            <div class="card-body">
+                                    {{returnHtml charities.listExplanation}}         
+                            </div>
+                          </div>
+                        </div>
+                      <div class="col-sm-6 flexcol">
+                        <div class="card cardRight flexcont">
+                            <div class="card-header">
+                                Organizations
+                            </div>
+                          <div class="card-body ">
+                            {{#if session.userId}}
+                            {{#each charities.groups}}
+                            {{#each this.organizations}}
+                                <p>{{this.organization.charityName}} - <a href="../">Add</a></p> 
+                                {{/each}}
+                            {{/each}}
+                            {{else}}
+                            {{#each charities.groups}}
+                            {{#each this.organizations}}
+                                <p>{{this.organization.charityName}}</p> 
+                                {{/each}}
+                            {{/each}}
+                            {{/if}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+        </div>
+    </div>

@@ -45,6 +45,10 @@ app.use(function(req, res, next){
         next();
 });
 
+Handlebars.registerHelper("returnHtml", function(context) {
+    return new Handlebars.SafeString(context)
+})
+
 Handlebars.registerHelper("slice8", function (context) {
     var result = '' + context;
     return result.slice(-8);
