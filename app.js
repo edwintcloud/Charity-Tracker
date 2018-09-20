@@ -45,6 +45,8 @@ app.use(function(req, res, next){
         next();
 });
 
+//==========HANDLEBARS HELPERS==========
+
 Handlebars.registerHelper("returnHtml", function(context) {
     return new Handlebars.SafeString(context)
 })

@@ -1,5 +1,12 @@
-
-
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb" style="background-color:white; margin-bottom:0;">
+      <hr />
+    <li class="breadcrumb-item"><a href="/charities">Charities</a></li>
+    <li class="breadcrumb-item active">{{charities.listName}}</li>
+  </ol>
+</nav>
+<input type="hidden" id="charityListName" value="{{charities.listName}}">
+<input type="hidden" id="charityListId" value="{{charities.listID}}">
     {{#unless charities}}
     <div class="jumbotron">
         <p class="lead" style="text-align:center;">Oops! We are having trouble retreiving the data.</p>
@@ -27,19 +34,11 @@
                                 Organizations
                             </div>
                           <div class="card-body ">
-                            {{#if session.userId}}
                             {{#each charities.groups}}
                             {{#each this.organizations}}
-                                <p>{{this.organization.charityName}} - <a href="../">Add</a></p> 
+                                <p><button class="btn btn-link" onclick="navigateOrganization('{{this.organization.ein}}');">{{this.organization.charityName}}</button></p> 
                                 {{/each}}
                             {{/each}}
-                            {{else}}
-                            {{#each charities.groups}}
-                            {{#each this.organizations}}
-                                <p>{{this.organization.charityName}}</p> 
-                                {{/each}}
-                            {{/each}}
-                            {{/if}}
                           </div>
                         </div>
                       </div>

@@ -23,7 +23,7 @@ app.post('/users/logout', (req, res) => {
             if(err) {
                 return next(err)
             } else {
-                return res.redirect('/')
+                return res.status(200).send()
             }
         })
     }

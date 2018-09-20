@@ -11,6 +11,11 @@ $(document).ready(function() {
         $("#loginInfo").hide()
         $("#loginInfo").text("")
     })
+    
+    $("#charityNavLink").ready(function() {
+        let name = sessionStorage.getItem("name")
+        $("#charityNavLink").text(name)
+    })
 })
 
 function resetRegisterFields() {
@@ -36,7 +41,7 @@ function usersLogin() {
             $("#loginInfo").show()
         } else {
             $("#loginInfo").hide()
-            window.location.replace("/")
+            location.reload()
         }
     }).catch(e => { console.log(e) })
 }
@@ -65,6 +70,12 @@ function usersRegister() {
         } else {
             window.location.replace("/")
         }
+    }).catch(e => { console.log(e) })
+}
+
+function usersLogout() {
+    axios.post("/users/logout").then(function(res) {
+        location.reload()
     }).catch(e => { console.log(e) })
 }
 
@@ -107,4 +118,11 @@ function updateCharity(index) {
     axios.put("/users/" + userId + "/charities/" + charityId, charity).then(function(res) {
         window.location.replace("/")
     }).catch(e => { console.log(e) })
+}
+
+function navigateOrganization(ein) {
+    let id = $("#charityListId").val()
+    let name = $("#charityListName").val()
+    sessionStorage.setItem("name", name)
+    window.location.replace("/charities/" + id + "/organizations/" + ein)
 }

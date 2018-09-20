@@ -1,0 +1,73 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb" style="background-color:white; margin-bottom:0;">
+      <hr />
+    <li class="breadcrumb-item"><a href="/charities">Charities</a></li>
+    <li class="breadcrumb-item"><a id="charityNavLink" href="../"></a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{organization.charityName}}</li>
+  </ol>
+</nav>
+    {{#unless organization}}
+    <div class="jumbotron">
+        <p class="lead" style="text-align:center;">Oops! We are having trouble retreiving the data.</p>
+    </div>
+    {{/unless}}
+    <div class="card charitiesContainer boxShadow">
+        <div class="jumbotron">
+            <p class="lead" style="text-align:center;font-size:2em;">{{organization.charityName}}</p>
+        </div>
+        <div class="card-body">
+                    <div class="row flexrow">
+                        <div class="col-sm-6 flexcol">
+                          <div class="card cardLeft flexcont">
+                              <div class="card-header">
+                                  Mission
+                              </div>
+                            <div class="card-body">
+                                    {{returnHtml organization.mission}}         
+                            </div>
+                          </div>
+                        </div>
+                      <div class="col-sm-6 ">
+                        <div class="card cardRight flexcont">
+                            <div class="card-header">
+                                Information
+                            </div>
+                          <div class="card-body">
+                              <p style="text-align:center;">
+                                  "{{organization.tagLine}}"
+                              </p>
+                              <hr />
+                              <div class="flexrow">
+                                  <div class="flexcol">
+                                      <div class="flexcont centerText" style="margin-top:1em;">
+                                          <p class="ratingHeaderText flexText">
+                                              Rating
+                                          </p> 
+                                          <img src="{{organization.currentRating.ratingImage.large}}"/> 
+                                          <p class="ratingText">
+                                              {{organization.currentRating.score}} / 100
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <div class="flexcol">
+                                      <div class="flexcont centerText">
+                                          <p style="margin:0;">
+                                              Website: 
+                                          </p> 
+                                          <a href="{{organization.websiteURL}}" target="_blank">{{organization.websiteURL}}</a>
+                                          <p style="margin: 0;">
+                                              Email: 
+                                          </p>
+                                          <a href="mailto:{{organization.generalEmail}}">{{organization.generalEmail}}</a>
+                                      </div>
+                                  </div>
+                              </div>
+                              {{#if session.userId}}
+                              <button class="btn btn-outline-success float-right" type="button" style="margin-top:1em;">Add to Profile</button>
+                              {{/if}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+        </div>
+    </div>
