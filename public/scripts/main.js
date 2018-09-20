@@ -16,6 +16,24 @@ $(document).ready(function() {
         let name = sessionStorage.getItem("name")
         $("#charityNavLink").text(name)
     })
+    
+    $("#addToProfileBtn").ready(function() {
+        let userId = $("#userId").val()
+        let name = $("#charityName").val()
+        axios.get("/users/" + userId + "/charities/" + name).then(function(res) {
+            if(res.data.charities) {
+                $("#addToProfileBtn").attr("disabled", "disabled")
+                $("#addToProfileBtn").removeClass("btn-outline-success")
+                $("#addToProfileBtn").addClass("btn-outline-secondary")
+                $("#addToProfileBtn").text("Added to Profile")
+            } else {
+                $("#addToProfileBtn").removeAttr("disabled")
+                $("#addToProfileBtn").removeClass("btn-outline-secondary")
+                $("#addToProfileBtn").addClass("btn-outline-success")
+                $("#addToProfileBtn").text("Add to Profile")
+            }
+        })
+    })
 })
 
 function resetRegisterFields() {
@@ -87,7 +105,24 @@ function addCharity() {
     let charity = { name, amount, userId }
     
     axios.post("/users/" + userId + "/charities/new", charity).then(function(res) {
-        window.location.replace("/")
+        location.reload()
+    }).catch(e => { console.log(e) })
+}
+
+function addToProfile(userId, name) {
+    let amount = "0"
+    let charity = { name, amount, userId }
+    axios.post("/users/" + userId + "/charities/new", charity).then(function(res) {
+        console.log(res.data)
+        if(!res.data.reason && !res.data.err) {
+            $("#addToProfileBtn").removeClass("btn-outline-success")
+            $("#addToProfileBtn").addClass("btn-outline-secondary")
+            $("#addToProfileBtn").text("Added to Profile")
+            $("#addToProfileBtn").attr("disabled", "disabled")
+        } else {
+            if(res.data.reason) alert(res.data.reason)
+            if(res.data.reason) return
+        }
     }).catch(e => { console.log(e) })
 }
 

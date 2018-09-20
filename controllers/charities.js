@@ -65,19 +65,31 @@ app.get('/charities/:id/organizations/:orgId', (req, res) => {
     
 // CREATE
 app.post('/users/:userId/charities/new', (req, res) => {
-    Charity.create(req.body).then(charity => {
-        res.status(200).send({ charity: charity })
+    Charity.findOne({ name: req.body.name }).then(charity => {
+        if(!charity) {
+            Charity.create(req.body).then(charity => {
+                res.status(200).send({ charity: charity })
+            })
+        } else { 
+            res.status(200).send({ reason: 'That charity is already in your list!' })
+        }
     }).catch(e => { 
         res.status(200).send({ err: e })
         console.log(e) 
     })
 })
-
-// READ - ALL
-app.get('/users/:userId/charities', (req, res) => {
-    Charity.find({ userId: req.params.userId }).then(charities => {
-        
-    }).catch(e => { console.log(e) })
+// READ - BY NAME
+app.get('/users/:userId/charities/:name', (req, res) => {
+    Charity.find({ name: req.params.name }).then(charities => {
+        if(charities.length > 0) {
+            res.status(200).send({ charities: charities })
+        } else {
+            res.status(200).send()
+        }
+    }).catch(e => { 
+        res.status(200).send({ err: e })
+        console.log(e) 
+    })
 })
 
 // READ - SINGLE

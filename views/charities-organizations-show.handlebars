@@ -6,6 +6,9 @@
     <li class="breadcrumb-item active" aria-current="page">{{organization.charityName}}</li>
   </ol>
 </nav>
+
+<input type="hidden" id="charityName" value="{{organization.charityName}}">
+<input type="hidden" id="userId" value="{{session.userId}}">
     {{#unless organization}}
     <div class="jumbotron">
         <p class="lead" style="text-align:center;">Oops! We are having trouble retreiving the data.</p>
@@ -63,7 +66,7 @@
                                   </div>
                               </div>
                               {{#if session.userId}}
-                              <button class="btn btn-outline-success float-right" type="button" style="margin-top:1em;">Add to Profile</button>
+                                <button id="addToProfileBtn" class="btn btn-outline-success float-right" type="button" style="margin-top:1em;" onclick="addToProfile('{{session.userId}}', '{{organization.charityName}}');">Add to Profile</button>
                               {{/if}}
                           </div>
                         </div>

@@ -60,14 +60,14 @@ app.post('/users/new', (req, res) => {
             User.create(req.body).then(user => {
                 req.session.userId = user._id
                 res.status(200).send()
-            }).catch(err => { 
-                console.log(err)
             })
         } else {
             res.status(200).send({ 
                 reason: 'Email already registered! If you have forgotten your password, please contact the administrator.' 
             })
         }
+    }).catch(err => { 
+        console.log(err)
     })
 })
 
