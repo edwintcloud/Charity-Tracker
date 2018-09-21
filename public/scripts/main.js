@@ -101,8 +101,9 @@ function addCharity() {
     
     let userId = document.getElementById("userLabel").getAttribute("user-id");
     let name = $("#addCharityName").val()
-    let amount = $("#addCharityAmount").val()
-    let charity = { name, amount, userId }
+    let amount = Number($("#addCharityAmount").val())
+    let donations = [amount]
+    let charity = { name, donations, userId }
     
     axios.post("/users/" + userId + "/charities/new", charity).then(function(res) {
         location.reload()
@@ -160,4 +161,13 @@ function navigateOrganization(ein) {
     let name = $("#charityListName").val()
     sessionStorage.setItem("name", name)
     window.location.replace("/charities/" + id + "/organizations/" + ein)
+}
+
+function openDonationModal(id, name, donations) {
+    var charityId = $("#addDonation-" + id).attr("charity-id")
+    document.getElementById("addDonationModalTable").innerHTML += `<h3>${name}</h3><hr />`
+    for (var i = 0;i < donations.length; i++) {
+        document.getElementById("addDonationModalTable").innerHTML += `<p>${donations[i]}</p>`
+    }
+    $("#addDonationModal").modal("show")
 }

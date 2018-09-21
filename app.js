@@ -58,13 +58,30 @@ Handlebars.registerHelper("slice8", function (context) {
 
 Handlebars.registerHelper("total", function (context) {
     var result = 0
+    
     const formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
       minimumFractionDigits: 2
     })
     for(var i in context) {
-        result += Number(context[i].amount)
+        for(var j = 0;j < context[i].donations.length; j++) {
+            result += context[i].donations[j]
+        }
+    }
+    return formatter.format(result);
+});
+
+Handlebars.registerHelper("totalArray", function (context) {
+    var result = 0
+    
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2
+    })
+    for(var j = 0;j < context.length; j++) {
+        result += context[j]
     }
     return formatter.format(result);
 });
