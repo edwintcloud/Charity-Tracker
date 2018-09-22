@@ -66,7 +66,7 @@ Handlebars.registerHelper("total", function (context) {
     })
     for(var i in context) {
         for(var j = 0;j < context[i].donations.length; j++) {
-            result += context[i].donations[j]
+            result += context[i].donations[j].amount
         }
     }
     return formatter.format(result);
@@ -81,7 +81,7 @@ Handlebars.registerHelper("totalArray", function (context) {
       minimumFractionDigits: 2
     })
     for(var j = 0;j < context.length; j++) {
-        result += context[j]
+        result += context[j].amount
     }
     return formatter.format(result);
 });

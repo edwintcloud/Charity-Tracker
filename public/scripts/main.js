@@ -102,7 +102,10 @@ function addCharity() {
     let userId = document.getElementById("userLabel").getAttribute("user-id");
     let name = $("#addCharityName").val()
     let amount = Number($("#addCharityAmount").val())
-    let donations = [amount]
+    let donations = [{
+        amount: amount,
+        date: new Date()
+    }]
     let charity = { name, donations, userId }
     
     axios.post("/users/" + userId + "/charities/new", charity).then(function(res) {

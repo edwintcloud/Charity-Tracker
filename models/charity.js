@@ -4,7 +4,10 @@ import mongoose from 'mongoose'
 // CREATE MONGOOSE MODEL
 const Charity = mongoose.model ('Charity', {
     name: String,
-    donations: [Number],
+    donations: [{
+        amount: Number,
+        date: Date
+    }],
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
