@@ -33,24 +33,29 @@ a > .card-body:hover {
     text-decoration: none;
 }
 
-.registration-panel {
-    margin: 2em auto 2em auto!important;
-    width: 60%!important;
-    vertical-align: center!important;
-}
-
 .card-header {
     text-align: center!important;
     font-size: 1.3em!important;
 }
 
-#register-form {
-    margin: 0 2em 0 2em!important;
+table {
+	width: 100%;
+	table-layout:fixed;
+	margin:auto;
 }
-
-.create-button {
-    padding-left: 2em!important;
-    padding-right: 2em!important;
+thead {
+	display:table;
+	width:100%;
+}
+tbody {
+	height:20em;
+	overflow-y:auto;
+	display:block;
+}
+tbody tr {
+	display:table;
+	width:100%;
+	table-layout:fixed;
 }
 
 .charitiesContainer {
@@ -92,17 +97,6 @@ a > .card-body:hover {
   flex-shrink: 1;
 }
 
-.apiImg {
-    width: 10em;
-    height: 2em;
-
-}
-.navbar-text {
-    padding-top: 0!important;
-    padding-bottom: 0!important;
-}
-
-
 .groupContainer {
     display: flex;
 }
@@ -118,10 +112,4 @@ a > .card-body:hover {
 }
 .boxShadow {
     box-shadow: 0 0 4px rgba(0,0,0,0.4);
-}
-.table-wrapper {
-    display: block;
-    max-height: 24em;
-    overflow-y: auto;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
 }

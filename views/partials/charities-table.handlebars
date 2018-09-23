@@ -1,12 +1,12 @@
 <div class="row">
   <div class="d-flex flex-fill m-5">
-    <div class="card flex-fill shadow">
-        <table class="table m-0">
+    <div class="card flex-fill shadow" style="width:35em;">
+        
+        <table class="table m-0 charityTable">
           <thead class="thead-light">
             <tr>
-              <th scope="col">Organization Name</th>
+              <th scope="col" style="width: 50%">Organization Name</th>
               <th scope="col">Amount Given</th>
-              <th scope="col"></th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -15,15 +15,13 @@
                   {{#each charities}}
                   <input type="hidden" charity-id="{{this._id}}" id="{{slice8 this._id}}">
                   <tr>
-                    <td id="{{slice8 this._id}}-name">{{this.name}}</td>
-                    <td id="{{slice8 this._id}}-amount">
+                    <td style="width: 50%" id="{{slice8 this._id}}-name">{{this.name}}</td>
+                    <td style="width: 20%" id="{{slice8 this._id}}-amount">
                       {{totalArray this.donations}}
                     </td>
                     <td>
                         <button id="addDonation-{{slice8 this._id}}" charity-id="{{this._id}}" class="btn btn-outline-success" type="button" onclick="openDonationModal('{{slice8 this._id}}');">Donations</button>
-                    </td>
-                  <td>
-                      <button class="btn btn-danger" type="button" onclick="deleteCharity('{{slice8 this._id}}');">Delete</button>
+                        <button class="btn btn-danger float-right" type="button" onclick="deleteCharity('{{slice8 this._id}}');">Delete</button>
                   </td>
                   </tr>
                   {{/each}}
@@ -31,13 +29,13 @@
             <tr>
               <td></td>
               <td></td>
-              <td></td>
               <td>
-                <button class="btn btn-success float-right" type="button" data-toggle="modal" data-target="#addCharityModal">Add</button>
+                
             </td>
             </tr>
           </tbody>
         </table>
+        <button class="btn btn-success float-right px-4" type="button" data-toggle="modal" data-target="#addCharityModal">Add</button>
     </div>
   </div>
   <div class="d-flex flex-fill m-5 ml-5">
@@ -73,7 +71,7 @@
         <div id="addCharityInfo" class="alert alert-danger d-none" role="alert"></div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-success">Add</button>
+        <button type="submit" class="btn btn-success px-4">Add</button>
       </div>
       </form>
     </div>
@@ -92,7 +90,7 @@
         </button>
       </div>
       <div class="modal-body">
-          <div id="addDonationModalTable" class="table-wrapper">
+          <div id="addDonationModalTable">
               
           </div>
         <form id="addDonationModalForm">
