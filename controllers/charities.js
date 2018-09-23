@@ -65,7 +65,7 @@ app.get('/charities/:id/organizations/:orgId', (req, res) => {
     
 // CREATE
 app.post('/users/:userId/charities/new', (req, res) => {
-    Charity.findOne({ name: req.body.name }).then(charity => {
+    Charity.findOne({ name: req.body.name, userId: req.session.userId }).then(charity => {
         if(!charity) {
             Charity.create(req.body).then(charity => {
                 res.status(200).send({ charity: charity })

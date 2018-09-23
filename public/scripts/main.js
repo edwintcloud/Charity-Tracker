@@ -98,7 +98,7 @@ function usersLogout() {
 }
 
 function addCharity() {
-    
+    $("#addCharityInfo").hide()
     let userId = document.getElementById("userLabel").getAttribute("user-id");
     let name = $("#addCharityName").val()
     let amount = Number($("#addCharityAmount").val())
@@ -109,7 +109,14 @@ function addCharity() {
     let charity = { name, donations, userId }
     
     axios.post("/users/" + userId + "/charities/new", charity).then(function(res) {
-        location.reload()
+        if(res.data.reason) {
+            $("#addCharityInfo").text(res.data.reason)
+            $("#addCharityInfo").fadeIn(500)
+            $("#addCharityInfo").fadeOut(3300)
+            
+        } else {
+            location.reload()
+        }
     }).catch(e => { console.log(e) })
 }
 
