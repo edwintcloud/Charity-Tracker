@@ -1,6 +1,7 @@
 // IMPORTS AND VARIABLES
 import express from 'express'
 import User from '../models/user'
+import Charity from '../models/charity'
 const app = express.Router()
 
 /* -----------------------
@@ -71,35 +72,55 @@ app.post('/users/new', (req, res) => {
     })
 })
 
-// READ - ALL
-app.get('/users', (req, res) => {
-    User.find().then(users => {
-        res.render('users-show', {
-            users: users
-        })
-    }).catch(e => { console.log(e) })
+// GET CHARITIES FOR SINGLE USER WITH OPTIONAL QUERY PARAMS
+app.get('/users/:userId/charities', (req, res) => {
+    var searchTerm = {}
+    if (req.query.id) {
+        searchTerm = { _id: req.query.id }
+    } else if (req.query.name) {
+        searchTerm = { name: req.query.name }
+    }
+    Charity.find(searchTerm).then(charities => {
+        if(charities.length > 0) {
+            res.status(200).send({ charities: charities })
+        } else {
+            res.status(200).send()
+        }
+    }).catch(e => { 
+        res.status(200).send({ err: e })
+        console.log(e) 
+    })
 })
 
-// READ - SINGLE
-app.get('/users/:userId', (req, res) => {
-    User.findById(req.params.userId).then(user => {
-        res.send(user)
-    }).catch(e => { console.log(e) })
-})
-
-// UPDATE
-app.put('/users/:userId', (req, res) => {
-    User.findByIdAndUpdate(req.params.userId, req.body).then(user => {
-        res.send(user)
-    }).catch(e => { console.log(e) })
-})
-
-// DELETE
-app.delete('/users/:userId', (req, res) => {
-    User.findByIdAndRemove(req.params.userId).then(user => {
-        res.send('User Removed')
-    }).catch(e => { console.log(e) })
-})
+// // READ - ALL
+// app.get('/users', (req, res) => {
+//     User.find().then(users => {
+//         res.render('users-show', {
+//             users: users
+//         })
+//     }).catch(e => { console.log(e) })
+// })
+// 
+// // READ - SINGLE
+// app.get('/users/:userId', (req, res) => {
+//     User.findById(req.params.userId).then(user => {
+//         res.send(user)
+//     }).catch(e => { console.log(e) })
+// })
+// 
+// // UPDATE
+// app.put('/users/:userId', (req, res) => {
+//     User.findByIdAndUpdate(req.params.userId, req.body).then(user => {
+//         res.send(user)
+//     }).catch(e => { console.log(e) })
+// })
+// 
+// // DELETE
+// app.delete('/users/:userId', (req, res) => {
+//     User.findByIdAndRemove(req.params.userId).then(user => {
+//         res.send('User Removed')
+//     }).catch(e => { console.log(e) })
+// })
 
 // EXPORT ROUTES
 module.exports = app

@@ -78,26 +78,6 @@ app.post('/users/:userId/charities/new', (req, res) => {
         console.log(e) 
     })
 })
-// READ - BY NAME
-app.get('/users/:userId/charities/:name', (req, res) => {
-    Charity.find({ name: req.params.name }).then(charities => {
-        if(charities.length > 0) {
-            res.status(200).send({ charities: charities })
-        } else {
-            res.status(200).send()
-        }
-    }).catch(e => { 
-        res.status(200).send({ err: e })
-        console.log(e) 
-    })
-})
-
-// READ - SINGLE
-app.get('/users/:userId/charities/:charityId', (req, res) => {
-    Charity.findById(req.params.charityId).then(charity => {
-        
-    }).catch(e => { console.log(e) })
-})
 
 // UPDATE
 app.put('/users/:userId/charities/:charityId', (req, res) => {

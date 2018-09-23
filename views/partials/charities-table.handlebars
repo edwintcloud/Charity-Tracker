@@ -16,11 +16,11 @@
                   <input type="hidden" charity-id="{{this._id}}" id="{{slice8 this._id}}">
                   <tr>
                     <td id="{{slice8 this._id}}-name">{{this.name}}</td>
-                    <td>
+                    <td id="{{slice8 this._id}}-amount">
                       {{totalArray this.donations}}
                     </td>
                     <td>
-                        <button id="addDonation-{{slice8 this._id}}" charity-id="{{this._id}}" class="btn btn-outline-success" type="button" onclick="openDonationModal('{{slice8 this._id}}', '{{this.name}}', [{{this.donations}}]);">Add Donation</button>
+                        <button id="addDonation-{{slice8 this._id}}" charity-id="{{this._id}}" class="btn btn-outline-success" type="button" onclick="openDonationModal('{{slice8 this._id}}');">Add Donation</button>
                     </td>
                   <td>
                       <button class="btn btn-danger" type="button" onclick="deleteCharity('{{slice8 this._id}}');">Delete</button>
@@ -46,7 +46,7 @@
             Current Contributions Total
         </div>
       <div class="card-body flexText totalText">
-        <p class="card-text">{{total charities}}</p>
+        <p class="card-text" id="contributionsTotal">{{total charities}}</p>
       </div>
     </div>
   </div>
@@ -95,11 +95,15 @@
           <div id="addDonationModalTable">
               
           </div>
-        <form id="addDonationModalForm" onsubmit="event.preventDefault();addDonation();">
-          <div class="form-group">
-            <input type="number" min="0.01" step="0.01" class="form-control" id="addDonationAmount" name="amount" placeholder="Amount" required>
-          </div>
-          <button type="submit" class="btn btn-success">Add</button>
+        <form id="addDonationModalForm">
+        <div class="form-group">
+            <div class="input-group mt-5">
+                <input type="number" min="0.01" step="0.01" class="form-control" id="addDonationAmount" name="amount" placeholder="Amount" required>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-outline-success">Add</button>
+                </div>
+            </div>
+        </div>
         </form>
       </div>
       <div class="modal-footer">

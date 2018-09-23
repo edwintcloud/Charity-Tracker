@@ -86,6 +86,24 @@ Handlebars.registerHelper("totalArray", function (context) {
     return formatter.format(result);
 });
 
+function prettyDate (c) {
+    var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    var dd = (c.getDate()<10 ? "0" + c.getDate() : c.getDate());
+    var month = months[c.getMonth()];
+    var yyyy = c.getFullYear();
+    var hh = c.getHours();
+    var mm = (c.getMinutes()<10 ? "0" + c.getMinutes() : c.getMinutes());
+    var ss = (c.getSeconds()<10 ? "0" + c.getSeconds() : c.getSeconds());
+    var mod = (hh>12 ? "PM" : "AM");
+    if(hh>12) {
+        hh -= 12;
+    }else {
+        hh = (hh == 0 ? 12 : hh);
+    }
+
+    return (month + ' ' + dd + ', ' + yyyy + ' ' + hh + ':' + mm + ':' + ss + ' ' + mod);
+}
+
 // USE OUR ROUTES
 app.use(routes)
   

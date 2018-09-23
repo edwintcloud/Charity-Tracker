@@ -20,7 +20,7 @@ $(document).ready(function() {
     $("#addToProfileBtn").ready(function() {
         let userId = $("#userId").val()
         let name = $("#charityName").val()
-        axios.get("/users/" + userId + "/charities/" + name).then(function(res) {
+        axios.get("/users/" + userId + "/charities?name=" + name).then(function(res) {
             if(res.data.charities) {
                 $("#addToProfileBtn").attr("disabled", "disabled")
                 $("#addToProfileBtn").removeClass("btn-outline-success")
@@ -114,8 +114,7 @@ function addCharity() {
 }
 
 function addToProfile(userId, name) {
-    let amount = "0"
-    let charity = { name, amount, userId }
+    let charity = { name, userId }
     axios.post("/users/" + userId + "/charities/new", charity).then(function(res) {
         console.log(res.data)
         if(!res.data.reason && !res.data.err) {
@@ -166,11 +165,85 @@ function navigateOrganization(ein) {
     window.location.replace("/charities/" + id + "/organizations/" + ein)
 }
 
-function openDonationModal(id, name, donations) {
+function openDonationModal(id) {
+    var userId = $("#userLabel").attr("user-id")
     var charityId = $("#addDonation-" + id).attr("charity-id")
-    document.getElementById("addDonationModalTable").innerHTML += `<h3>${name}</h3><hr />`
-    for (var i = 0;i < donations.length; i++) {
-        document.getElementById("addDonationModalTable").innerHTML += `<p>${donations[i]}</p>`
+    axios.get("/users/" + userId + "/charities?id=" + charityId).then(function(res) {
+        document.getElementById("addDonationModalTable").innerHTML = ''
+        $("#addDonationModalLabel").text(res.data.charities[0].name + " - Donations")
+        $("#addDonationModalForm").attr("onsubmit", "event.preventDefault();addDonation('" + charityId.slice(-8) + "')")
+        
+        let donations = res.data.charities[0].donations
+        
+        var table = $("<table>").appendTo("#addDonationModalTable")
+        table.addClass("table")
+        
+        var header = $("<thead />").appendTo(table)
+        $("<th />", { text: "Amount" }).appendTo(header)
+        $("<th />", { text: "Date" }).appendTo(header)
+        
+        var tBody = $("<tbody />").appendTo(table)
+        for(var i = 0; i < donations.length; i++) {
+            var row = $("<tr />").appendTo(tBody)
+            $("<td />", { text: prettyAmount(donations[i]['amount']) }).appendTo(row)
+            $("<td />", { text: prettyDate(donations[i]['date']) }).appendTo(row)
+        }
+    
+         $("#addDonationModal").modal("show")
+    })
+}
+
+function addDonation(id) {
+    var userId = $("#userLabel").attr("user-id")
+    var charityId = $("#addDonation-" + id).attr("charity-id")
+    var amount = $("#addDonationAmount").val()
+    var date = new Date()
+    var donation = { amount: amount, date: date }
+    var addDonation = { $push: { donations: donation } }
+    axios.put('/users/' + userId + '/charities/' + charityId, addDonation).then(function(res) {
+        if(!res.data.err) {
+            $("#addDonationAmount").val("")
+            
+            $("#addDonationModalTable tbody").append(`
+                <tr>
+                    <td>${prettyAmount(amount)}</td>
+                    <td>${prettyDate(date)}</td>
+                </tr>
+            `)
+            
+            var curAmount = Number($("#" + charityId.slice(-8) + "-amount").text().replace(/[^\d.-]/g, ''))
+            var curTotal = Number($("#contributionsTotal").text().replace(/[^\d.-]/g, ''))
+            var total = Number(amount)
+            $("#" + charityId.slice(-8) + "-amount").text(prettyAmount((curAmount + total)))
+            $("#contributionsTotal").text(prettyAmount((curTotal + total)))
+        }
+    })
+}
+
+function prettyDate (date) {
+    var c = new Date(date);
+    var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    var dd = (c.getDate()<10 ? "0" + c.getDate() : c.getDate());
+    var month = months[c.getMonth()];
+    var yyyy = c.getFullYear();
+    var hh = c.getHours();
+    var mm = (c.getMinutes()<10 ? "0" + c.getMinutes() : c.getMinutes());
+    var ss = (c.getSeconds()<10 ? "0" + c.getSeconds() : c.getSeconds());
+    var mod = (hh>12 ? "PM" : "AM");
+    if(hh>12) {
+        hh -= 12;
+    }else {
+        hh = (hh == 0 ? 12 : hh);
     }
-    $("#addDonationModal").modal("show")
+
+    return (month + ' ' + dd + ', ' + yyyy + ' ' + hh + ':' + mm + ':' + ss + ' ' + mod);
+}
+
+function prettyAmount(amount) {
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2
+    })
+    return formatter.format(amount)
 }
