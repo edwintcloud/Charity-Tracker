@@ -188,7 +188,7 @@ function openDonationModal(id) {
             $("<td />", { text: prettyAmount(donations[i]['amount']) }).appendTo(row)
             $("<td />", { text: prettyDate(donations[i]['date']) }).appendTo(row)
         }
-    
+        
          $("#addDonationModal").modal("show")
     })
 }

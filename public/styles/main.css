@@ -114,3 +114,9 @@
 .centerText {
     text-align: center;
 }
+.table-wrapper {
+    display: block;
+    max-height: 24em;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
