@@ -1,5 +1,15 @@
+.apiImg {
+    width: 10em;
+    height: 2em;
+
+}
+
 .jumbotron {
     margin-bottom: 0!important;
+}
+
+.table > tbody > tr > td {
+     vertical-align: middle;
 }
 
 .registration-panel {
@@ -106,13 +116,6 @@
 }
 .boxShadow {
     box-shadow: 0 0 4px rgba(0,0,0,0.4);
-}
-.totalText {
-    font-size: 3em;
-    color: green;
-}
-.centerText {
-    text-align: center;
 }
 .table-wrapper {
     display: block;
