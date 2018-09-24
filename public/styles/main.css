@@ -1,16 +1,16 @@
 .apiImg {
     width: 10em;
     height: 2em;
-
 }
 
-.table > tbody > tr > td {
-     vertical-align: middle;
+.table>tbody>tr>td {
+    vertical-align: middle;
 }
 
 .groupImg {
-    width: 15em;
-    height: 15em;   
+    width: 10em;
+    height: 10em;
+    border-radius: 20%;
 }
 
 .groupText {
@@ -19,93 +19,47 @@
     color: black;
 }
 
-a > .card-body:hover {
-    
+a>.card-body {
+    color: black;
+}
+
+a>.card-body:hover {
     background-color: rgba(200, 200, 200, 0.3);
     opacity: 0.7;
 }
 
-.card > a:hover {
+.card>a:hover {
     text-decoration: none;
 }
 
 .card-header {
-    text-align: center!important;
-    font-size: 1.3em!important;
+    text-align: center !important;
+    font-size: 1.3em !important;
 }
 
 table {
-	width: 100%;
-	table-layout:fixed;
-	margin:auto;
+    width: 100%;
+    table-layout: fixed;
+    margin: auto;
 }
+
 thead {
-	display:table;
-	width:100%;
+    display: table;
+    width: 100%;
 }
+
 tbody {
-	height:20em;
-	overflow-y:auto;
-	display:block;
+    height: 20em;
+    overflow-y: auto;
+    display: block;
 }
+
 tbody tr {
-	display:table;
-	width:100%;
-	table-layout:fixed;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
 }
 
-.charitiesContainer {
-    margin: 2em;
-    margin-top: 0;
-}
-
-.cardLeft {
-    margin-left: 2em;
-    margin-top: 2em;
-    margin-bottom: 2em;
-}
-
-.cardRight {
-    margin-right: 2em;
-    margin-top: 2em;
-    margin-bottom: 2em;
-}
-
-.flexrow { 
-  display: flex; 
-  flex-flow: row wrap;
-}
-
-.flexcol {
-  flex: 0 0 50%;
-  display: flex;
-}
-
-.flexcont {
-  flex: 0 0 100%;
-  flex-shrink: 1;
-}
-
-.flexText {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 1;
-}
-
-.groupContainer {
-    display: flex;
-}
-
-.ratingText {
-    font-size: 0.8em;
-}
-.ratingHeaderText {
-    font-size: 1.2em;
-    margin: 0;
-    padding: 0;
-    text-decoration: underline;
-}
-.boxShadow {
-    box-shadow: 0 0 4px rgba(0,0,0,0.4);
+.charity-card>div:first-child {
+    margin-top: 0 !important;
 }

@@ -1,48 +1,48 @@
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb" style="background-color:white; margin-bottom:0;">
-      <hr />
-    <li class="breadcrumb-item"><a href="/charities">Charities</a></li>
-    <li class="breadcrumb-item active">{{charities.listName}}</li>
-  </ol>
+    <ol class="breadcrumb bg-white mb-0">
+        <hr />
+        <li class="breadcrumb-item"><a href="/charities">Charities</a></li>
+        <li class="breadcrumb-item active">{{charities.listName}}</li>
+    </ol>
 </nav>
 <input type="hidden" id="charityListName" value="{{charities.listName}}">
 <input type="hidden" id="charityListId" value="{{charities.listID}}">
-    {{#unless charities}}
+{{#unless charities}}
     <div class="jumbotron mb-5">
-        <p class="lead" style="text-align:center;">Oops! We are having trouble retreiving the data.</p>
+        <p class="lead text-center">Oops! We are having trouble retreiving the data.</p>
     </div>
-    {{else}}
-    <div class="card charitiesContainer">
+{{else}}
+    <div class="card mt-0 mb-5 mx-5 shadow-lg">
         <div class="jumbotron mb-0">
-            <p class="lead" style="text-align:center;font-size:2em;">{{charities.listName}}</p>
+            <p class="lead text-center" style="font-size:2em;">{{charities.listName}}</p>
         </div>
         <div class="card-body">
-                    <div class="row flexrow">
-                        <div class="col-sm-6 flexcol">
-                          <div class="card cardLeft flexcont">
-                              <div class="card-header">
-                                  About
-                              </div>
-                            <div class="card-body">
-                                    {{returnHtml charities.listExplanation}}         
-                            </div>
-                          </div>
+            <div class="d-flex flex-row flex-wrap mx-4">
+                <div class="d-flex flex-fill col-lg-6 my-4">
+                    <div class="card flex-fill shadow">
+                        <div class="card-header">
+                            About
                         </div>
-                      <div class="col-sm-6 flexcol">
-                        <div class="card cardRight flexcont">
-                            <div class="card-header">
-                                Organizations
-                            </div>
-                          <div class="card-body ">
+                        <div class="card-body">
+                            {{returnHtml charities.listExplanation}}
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-fill col-lg-6 my-4">
+                    <div class="card flex-fill shadow">
+                        <div class="card-header">
+                            Organizations
+                        </div>
+                        <div class="card-body">
                             {{#each charities.groups}}
-                            {{#each this.organizations}}
-                                <p><button class="btn btn-link" onclick="navigateOrganization('{{this.organization.ein}}');">{{this.organization.charityName}}</button></p> 
+                                {{#each this.organizations}}
+                                    <p><button class="btn btn-link" onclick="navigateOrganization('{{this.organization.ein}}');">{{this.organization.charityName}}</button></p>
                                 {{/each}}
                             {{/each}}
-                          </div>
                         </div>
-                      </div>
                     </div>
+                </div>
+            </div>
         </div>
     </div>
-    {{/unless}}
+{{/unless}}

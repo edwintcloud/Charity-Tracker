@@ -1,5 +1,5 @@
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb" style="background-color:white; margin-bottom:0;">
+  <ol class="breadcrumb bg-white mb-0">
       <hr />
     <li class="breadcrumb-item"><a href="/charities">Charities</a></li>
     <li class="breadcrumb-item"><a id="charityNavLink" href="../"></a></li>
@@ -11,17 +11,17 @@
 <input type="hidden" id="userId" value="{{session.userId}}">
     {{#unless organization}}
     <div class="jumbotron mb-5">
-        <p class="lead" style="text-align:center;">Oops! We are having trouble retreiving the data.</p>
+        <p class="lead text-center">Oops! We are having trouble retreiving the data.</p>
     </div>
     {{else}}
-    <div class="card charitiesContainer boxShadow">
+    <div class="card mt-0 mb-5 mx-5 shadow-lg">
         <div class="jumbotron mb-0">
-            <p class="lead" style="text-align:center;font-size:2em;">{{organization.charityName}}</p>
+            <p class="lead text-center" style="font-size:2em;">{{organization.charityName}}</p>
         </div>
         <div class="card-body">
-                    <div class="row flexrow">
-                        <div class="col-sm-6 flexcol">
-                          <div class="card cardLeft flexcont">
+                    <div class="d-flex flex-row flex-wrap mx-4">
+                        <div class="d-flex flex-fill col-lg-6 my-4">
+                          <div class="card flex-fill shadow">
                               <div class="card-header">
                                   Mission
                               </div>
@@ -30,35 +30,35 @@
                             </div>
                           </div>
                         </div>
-                      <div class="col-sm-6 ">
-                        <div class="card cardRight flexcont">
+                      <div class="d-flex flex-fill col-lg-6 my-4">
+                        <div class="card flex-fill shadow">
                             <div class="card-header">
                                 Information
                             </div>
                           <div class="card-body">
-                              <p style="text-align:center;">
+                              <p class="text-center">
                                   "{{organization.tagLine}}"
                               </p>
                               <hr />
-                              <div class="flexrow">
-                                  <div class="flexcol">
-                                      <div class="flexcont centerText" style="margin-top:1em;">
-                                          <p class="ratingHeaderText flexText">
-                                              Rating
+                              <div class="d-flex flex-row flex-wrap">
+                                  <div class="d-flex flex-column justify-content-center col-md-6">
+                                      <div class="text-center">
+                                          <p class="mt-3 mb-0" style="font-size: 1.2em;">
+                                              <u>Rating</u>
                                           </p> 
                                           <img src="{{organization.currentRating.ratingImage.large}}"/> 
-                                          <p class="ratingText">
+                                          <p style="font-size: 0.8em;">
                                               {{organization.currentRating.score}} / 100
                                           </p>
                                       </div>
                                   </div>
-                                  <div class="flexcol">
-                                      <div class="flexcont centerText">
-                                          <p style="margin:0;">
+                                  <div class="d-flex flex-column justify-content-center col-md-6">
+                                      <div class="text-center">
+                                          <p class="m-0">
                                               Website: 
                                           </p> 
                                           <a href="{{organization.websiteURL}}" target="_blank">{{organization.websiteURL}}</a>
-                                          <p style="margin: 0;">
+                                          <p class="m-0">
                                               Email: 
                                           </p>
                                           <a href="mailto:{{organization.generalEmail}}">{{organization.generalEmail}}</a>
@@ -66,7 +66,7 @@
                                   </div>
                               </div>
                               {{#if session.userId}}
-                                <button id="addToProfileBtn" class="btn btn-outline-success float-right" type="button" style="margin-top:1em;" onclick="addToProfile('{{session.userId}}', '{{organization.charityName}}');">Add to Profile</button>
+                                <button id="addToProfileBtn" class="btn btn-outline-success float-right mt-3" type="button" onclick="addToProfile('{{session.userId}}', '{{organization.charityName}}');">Add to Profile</button>
                               {{/if}}
                           </div>
                         </div>
