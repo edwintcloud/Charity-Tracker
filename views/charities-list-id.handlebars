@@ -8,12 +8,12 @@
 <input type="hidden" id="charityListName" value="{{charities.listName}}">
 <input type="hidden" id="charityListId" value="{{charities.listID}}">
     {{#unless charities}}
-    <div class="jumbotron">
+    <div class="jumbotron mb-5">
         <p class="lead" style="text-align:center;">Oops! We are having trouble retreiving the data.</p>
     </div>
-    {{/unless}}
+    {{else}}
     <div class="card charitiesContainer">
-        <div class="jumbotron">
+        <div class="jumbotron mb-0">
             <p class="lead" style="text-align:center;font-size:2em;">{{charities.listName}}</p>
         </div>
         <div class="card-body">
@@ -45,3 +45,4 @@
                     </div>
         </div>
     </div>
+    {{/unless}}

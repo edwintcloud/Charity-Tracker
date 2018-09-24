@@ -86,7 +86,7 @@ function usersRegister() {
             $("#registerFormEmail").addClass("is-invalid")
             $("#registerFormEmailInfo").text(res.data.reason)
         } else {
-            window.location.replace("/")
+            window.location.href = "/"
         }
     }).catch(e => { console.log(e) })
 }
@@ -169,7 +169,7 @@ function navigateOrganization(ein) {
     let id = $("#charityListId").val()
     let name = $("#charityListName").val()
     sessionStorage.setItem("name", name)
-    window.location.replace("/charities/" + id + "/organizations/" + ein)
+    window.location.href = "/charities/" + id + "/organizations/" + ein
 }
 
 function openDonationModal(id) {
