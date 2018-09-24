@@ -1,17 +1,17 @@
 <div class="card m-5 shadow-lg" style="margin-top:57px!important;">
-{{#if session.userId}}
-<div class="jumbotron mb-0">
-    <h1 class="display-4" id="userLabel" user-id={{user._id}}>Hello {{user.firstName}}!</h1>
-    <p class="lead">Make updates to your charities below or find new charities <a href='/charities'>here</a>.</p>
-</div>
-{{>charities-table}}
-{{else}}
-<div class="jumbotron mb-0">
-  <h1 class="display-4">Get Started Today!</h1>
-  <p class="lead">A simple tool to track the charities you donate to.</p>
-  <hr class="my-4">
-  <p>Create an Account Now</p>
-  <a class="btn btn-primary btn-lg" href="/users/register" role="button">Register</a>
-</div>
-{{/if}}
+    {{#if session.userId}}
+        <div class="jumbotron mb-0">
+            <h1 class="display-4" id="userLabel" user-id={{user._id}}>Hello {{user.firstName}}!</h1>
+            <p class="lead">Make updates to your charities below or find new charities <a href='/charities'>here</a>.</p>
+        </div>
+        {{>charities-table}}
+    {{else}}
+        <div class="jumbotron mb-0">
+            <h1 class="display-4">Get Started Today!</h1>
+            <p class="lead">A simple tool to track the charities you donate to.</p>
+            <hr class="my-4">
+            <p>Create an Account Now</p>
+            <a class="btn btn-primary btn-lg" href="/users/register" role="button">Register</a>
+        </div>
+    {{/if}}
 </div>

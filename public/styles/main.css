@@ -63,3 +63,8 @@ tbody tr {
 .charity-card>div:first-child {
     margin-top: 0 !important;
 }
+
+.d-flex > hr {
+  margin-left: 0;
+  margin-right: 0;
+}
