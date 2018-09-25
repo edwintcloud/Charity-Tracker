@@ -80,11 +80,11 @@ app.get('/users/:userId/charities', (req, res) => {
     } else if (req.query.name) {
         searchTerm = { name: req.query.name }
     }
-    Charity.find(searchTerm).then(charities => {
-        if(charities.length > 0) {
+    Charity.findOne(searchTerm).then(charities => {
+        if(charities) {
             res.status(200).send({ charities: charities })
         } else {
-            res.status(200).send()
+            res.status(200).send({ reason: 'No charities found'})
         }
     }).catch(e => { 
         res.status(200).send({ err: e })

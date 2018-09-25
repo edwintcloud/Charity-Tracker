@@ -176,10 +176,10 @@ function openDonationModal(id) {
     const charityId = $("#addDonation-" + id).attr("charity-id")
     axios.get("/users/" + userId + "/charities?id=" + charityId).then(function(res) {
         document.getElementById("addDonationModalTable").innerHTML = ''
-        $("#addDonationModalLabel").text(res.data.charities[0].name + " - Donations")
+        $("#addDonationModalLabel").text(res.data.charities.name + " - Donations")
         $("#addDonationModalForm").attr("onsubmit", "event.preventDefault();addDonation('" + charityId.slice(-8) + "')")
         
-        const donations = res.data.charities[0].donations
+        let donations = res.data.charities.donations
         
         let table = $("<table>").appendTo("#addDonationModalTable")
         table.addClass("table")
