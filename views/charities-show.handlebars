@@ -2,9 +2,17 @@
     {{#if session.userId}}
         <div class="jumbotron mb-0">
             <h1 class="display-4" id="userLabel" user-id={{user._id}}>Hello {{user.firstName}}!</h1>
+            {{#if charities}}
             <p class="lead">Make updates to your charities below or find new charities <a href='/charities'>here</a>.</p>
         </div>
-        {{>charities-table}}
+            {{>charities-table}}
+            {{else}}
+            <p class="lead">Make updates to your charities below or find new charities <a href='/charities'>here</a>.</p>
+            <hr class="my-4">
+            <p>Add Your First Charity</p>
+            <button class="btn btn-success" type="button" data-toggle="modal" data-target="#addCharityModal">Add</button>
+        </div>
+            {{/if}}
     {{else}}
         <div class="jumbotron mb-0">
             <h1 class="display-4">Get Started Today!</h1>
@@ -15,3 +23,6 @@
         </div>
     {{/if}}
 </div>
+
+{{>charities-new-modal}}
+{{>charities-donations-show-modal}}

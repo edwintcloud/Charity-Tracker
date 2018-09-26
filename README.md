@@ -1,5 +1,8 @@
 # Charity-Tracker
-A Node.js and MongoDB project.
+A RESTful application built using Node.js, Express.js, Handlebars.js, and MongoDB. This project pulls data from the [Charity Navigator](https://www.charitynavigator.org/) API.
+
+## Heroku
+This project is hosted on Heroku [here](https://charity-tracker-ec.herokuapp.com/).
 
 ## Running Locally
 Make sure you have [Node.js](http://nodejs.org/) and [MongoDB](https://www.mongodb.com/) installed.
