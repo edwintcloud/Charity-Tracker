@@ -60,11 +60,68 @@ tbody tr {
     table-layout: fixed;
 }
 
-.charity-card>div:first-child {
+.charity-card div:first-child {
     margin-top: 0 !important;
 }
 
 .d-flex > hr {
   margin-left: 0;
   margin-right: 0;
+}
+
+@media only screen and (max-width: 600px) {
+    .card{
+        margin:.5em!important;
+        
+    }
+    .card-body{
+        padding: .4em!important;
+    }
+    .my-4,
+    .mx-4,
+    .mx-5{
+        margin:0 .5em!important;
+        padding: 0!important;
+    }
+    td {
+        padding: .4em!important;
+    }
+    td .btn {
+        float: right!important;
+        margin-left: 0!important;
+    }
+    td:nth-child(2) {
+        width: 30%!important;
+    }
+    #contributionsTotal {
+        font-size: 1.4em!important;
+        margin-top: .5em!important;
+    }
+    td .btn {
+        padding: .4em!important;
+    }
+    #addDonationModalTable tr td:last-child {
+        width: 50%!important;
+    }
+    .col-lg-6:last-child {
+        margin-bottom: 2em!important;
+    }
+    .charity-card img {
+        width: 7em!important;
+        height: 7em!important;
+    }
+    div .h3{
+        font-size: 1em!important;
+        line-height: 22px!important;
+    }
+    
+    .d-flex .w-75 {
+        margin-bottom: .2em!important;
+    }
+    .text-left {
+        text-align: center!important;
+    }
+    .charity-card {
+        margin-bottom: 2.6em!important;
+    }
 }
