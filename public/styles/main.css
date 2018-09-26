@@ -75,12 +75,15 @@ tbody tr {
         
     }
     .card-body{
-        padding: .4em!important;
+        padding: 0!important;
     }
     .my-4,
-    .mx-4,
+    .mx-4 {
+        margin:0!important;
+        padding: 0!important;
+    }
     .mx-5{
-        margin:0 .5em!important;
+        margin:0.5em!important;
         padding: 0!important;
     }
     td {
@@ -99,6 +102,8 @@ tbody tr {
     }
     td .btn {
         padding: .4em!important;
+        margin-bottom: .3em!important;
+        margin-top: .3em!important;
     }
     #addDonationModalTable tr td:last-child {
         width: 50%!important;
@@ -125,5 +130,20 @@ tbody tr {
     .charity-card {
         margin-bottom: 2.6em!important;
     }
-
+    .col-lg-4 {
+        margin-bottom: 3em!important;
+        padding: 0!important;
+    }
+    .card-body .card-body {
+        padding: .5em!important;
+    }
+    .btn-link {
+        padding: 0!important;
+    }
+    .charity-card .card-body {
+        padding: .5em!important;
+    }
+    .col-lg-4 .card-body {
+        padding: .5em!important;
+    }
 }
