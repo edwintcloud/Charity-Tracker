@@ -109,6 +109,7 @@ tbody tr {
     .charity-card img {
         width: 7em!important;
         height: 7em!important;
+        margin-left: 1em!important;
     }
     div .h3{
         font-size: 1em!important;
@@ -124,4 +125,5 @@ tbody tr {
     .charity-card {
         margin-bottom: 2.6em!important;
     }
+
 }
