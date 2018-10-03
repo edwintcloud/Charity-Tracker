@@ -25,10 +25,10 @@ app.engine('handlebars', exphbs({
     defaultLayout: 'main'
 }))
 app.set('view engine', 'handlebars')
-  
+
 //============EXPRESS CONFIGURATION============
 app.use(session({
-    secret: 'fluffybunnies',    
+    secret: 'fluffybunnies',
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({
@@ -58,7 +58,7 @@ Handlebars.registerHelper("slice8", function (context) {
 
 Handlebars.registerHelper("total", function (context) {
     var result = 0
-    
+
     const formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -74,7 +74,7 @@ Handlebars.registerHelper("total", function (context) {
 
 Handlebars.registerHelper("totalArray", function (context) {
     var result = 0
-    
+
     const formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -106,8 +106,11 @@ function prettyDate (c) {
 
 // USE OUR ROUTES
 app.use(routes)
-  
+
 // START OUR SERVER
 app.listen(process.env.PORT || 3000, () => {
     console.log('App is running on http://localhost:3000')
 })
+
+// export our app so chai can use it for testing
+module.exports = app

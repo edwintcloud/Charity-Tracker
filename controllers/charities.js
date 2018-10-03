@@ -8,13 +8,13 @@ const app = express.Router()
 /* -----------------------
   |  STATIC ROUTES BELOW  |
    ----------------------- */
-    
+
 // HOME PAGE
 app.get('/', (req, res) => {
     if(req.session.userId) {
         User.findById(req.session.userId).then(user => {
-            Charity.find({ userId: user._id }).then(charities => {    
-                res.render('charities-show', { user: user, charities: charities })    
+            Charity.find({ userId: user._id }).then(charities => {
+                res.render('charities-show', { user: user, charities: charities })
             })
         }).catch(e => { console.log(e) })
     } else{
@@ -52,7 +52,7 @@ app.get('/charities/:id/organizations/:orgId', (req, res) => {
         if(!err && response.statusCode == 200) {
             const resBody = JSON.parse(body)
             res.render('charities-organizations-show', {organization: resBody})
-            
+
         } else {
             res.render('charities-organizations-show')
         }
@@ -62,7 +62,7 @@ app.get('/charities/:id/organizations/:orgId', (req, res) => {
 /* ---------------------
   |  CRUD ROUTES BELOW  |
    --------------------- */
-    
+
 // CREATE
 app.post('/users/:userId/charities/new', (req, res) => {
     Charity.findOne({ name: req.body.name, userId: req.session.userId }).then(charity => {
@@ -70,22 +70,22 @@ app.post('/users/:userId/charities/new', (req, res) => {
             Charity.create(req.body).then(charity => {
                 res.status(200).send({ charity: charity })
             })
-        } else { 
+        } else {
             res.status(200).send({ reason: 'That charity is already in your list!' })
         }
-    }).catch(e => { 
-        res.status(200).send({ err: e })
-        console.log(e) 
+    }).catch(e => {
+        res.status(400).send({ err: e })
+        console.log(e)
     })
 })
 
 // UPDATE
 app.put('/users/:userId/charities/:charityId', (req, res) => {
     Charity.findByIdAndUpdate(req.params.charityId, req.body).then(charity => {
-        res.status(200).send()
-    }).catch(e => { 
+        res.status(200).send({ charity: charity })
+    }).catch(e => {
         res.status(400).send({ err: e })
-        console.log(e) 
+        console.log(e)
     })
 })
 
@@ -93,9 +93,9 @@ app.put('/users/:userId/charities/:charityId', (req, res) => {
 app.delete('/users/:userId/charities/:charityId', (req, res) => {
     Charity.findByIdAndRemove(req.params.charityId).then(charity => {
         res.status(200).send()
-    }).catch(e => { 
+    }).catch(e => {
         res.status(400).send({ err: e })
-        console.log(e) 
+        console.log(e)
     })
 })
 

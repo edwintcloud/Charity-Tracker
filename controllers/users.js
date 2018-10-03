@@ -7,15 +7,6 @@ const app = express.Router()
 /* -----------------------
   |  AUTH ROUTES BELOW  |
    ----------------------- */
-    
-// USERS PAGE
-app.get('/users', (req, res) => {
-    User.find().then(users => {
-        res.render('users-show', {
-            users: users
-        })
-    })
-})
 
 //Logout
 app.post('/users/logout', (req, res) => {
@@ -52,7 +43,7 @@ app.get('/users/register', (req, res) => {
 /* ---------------------
   |  CRUD ROUTES BELOW  |
    --------------------- */
-    
+
 // CREATE
 app.post('/users/new', (req, res) => {
     User.findOne({ email: req.body.email }, function(err, user) {
@@ -60,14 +51,14 @@ app.post('/users/new', (req, res) => {
         if(!user) {
             User.create(req.body).then(user => {
                 req.session.userId = user._id
-                res.status(200).send()
+                res.status(200).send({ user: user })
             })
         } else {
-            res.status(200).send({ 
-                reason: 'Email already registered! If you have forgotten your password, please contact the administrator.' 
+            res.status(200).send({
+                reason: 'Email already registered! If you have forgotten your password, please contact the administrator.'
             })
         }
-    }).catch(err => { 
+    }).catch(err => {
         console.log(err)
     })
 })
@@ -86,41 +77,11 @@ app.get('/users/:userId/charities', (req, res) => {
         } else {
             res.status(200).send({ reason: 'No charities found'})
         }
-    }).catch(e => { 
+    }).catch(e => {
         res.status(200).send({ err: e })
-        console.log(e) 
+        console.log(e)
     })
 })
-
-// // READ - ALL
-// app.get('/users', (req, res) => {
-//     User.find().then(users => {
-//         res.render('users-show', {
-//             users: users
-//         })
-//     }).catch(e => { console.log(e) })
-// })
-// 
-// // READ - SINGLE
-// app.get('/users/:userId', (req, res) => {
-//     User.findById(req.params.userId).then(user => {
-//         res.send(user)
-//     }).catch(e => { console.log(e) })
-// })
-// 
-// // UPDATE
-// app.put('/users/:userId', (req, res) => {
-//     User.findByIdAndUpdate(req.params.userId, req.body).then(user => {
-//         res.send(user)
-//     }).catch(e => { console.log(e) })
-// })
-// 
-// // DELETE
-// app.delete('/users/:userId', (req, res) => {
-//     User.findByIdAndRemove(req.params.userId).then(user => {
-//         res.send('User Removed')
-//     }).catch(e => { console.log(e) })
-// })
 
 // EXPORT ROUTES
 module.exports = app
