@@ -20,12 +20,12 @@
         "handlebars-intl": "^1.1.2",
         "method-override": "^3.0.0",
         "mongoose": "^5.3.1",
-        "request": "^2.88.0"
-    },
-    "devDependencies": {
+        "request": "^2.88.0",
         "babel-core": "^6.26.3",
         "babel-preset-env": "^1.7.0",
-        "babel-watch": "^2.0.7",
+        "babel-watch": "^2.0.7"
+    },
+    "devDependencies": {
         "chai": "^4.2.0",
         "chai-http": "^4.2.0",
         "mocha": "^5.2.0"
