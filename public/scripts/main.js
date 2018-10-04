@@ -1,7 +1,7 @@
 $(document).ready(function() {
     // Check what page we are on and set navbar accordingly
     $('li a.active').removeClass('active');
-    $('a[href="' + location.pathname + '"]').closest('li').addClass('active'); 
+    $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
     // Reset alert information before register form is loaded
     resetRegisterFields()
     // When login modal is hiddden, reset it
@@ -50,7 +50,7 @@ function usersLogin() {
         if (formElements[i].type != "submit") //we dont want to include the submit-buttom
             user[formElements[i].name] = formElements[i].value;
     }
-    
+
     axios.post("/users/login", user).then(function(res) {
         if(res.data.reason) {
             $("#loginPassword").val("")
@@ -70,14 +70,14 @@ function usersRegister() {
         if (formElements[i].type != "submit") //we dont want to include the submit-buttom
             user[formElements[i].name] = formElements[i].value;
     }
-    
+
     if(user['password'] != user['passwordConfirm']) {
         $("#registerFormPassword").val("")
         $("#registerFormConfirmPassword").val("")
         $("#registerFormPassword").addClass("is-invalid")
         $("#registerFormConfirmPassword").addClass("is-invalid")
         $("#registerFormConfirmPasswordInfo").text("Passwords must match!")
-        return 
+        return
     }
 
     axios.post("/users/new", user).then(function(res) {
@@ -106,20 +106,22 @@ function addCharity() {
         date: new Date()
     }]
     const charity = { name, donations, userId }
-    
+
     axios.post("/users/" + userId + "/charities/new", charity).then(function(res) {
         if(res.data.reason) {
             $("#addCharityInfo").text(res.data.reason)
             $("#addCharityInfo").fadeIn(500)
             $("#addCharityInfo").fadeOut(3300)
-            
+
         } else {
             location.reload()
         }
     }).catch(e => { console.log(e) })
 }
 
-function addToProfile(userId, name) {
+function addToProfile() {
+    const name = $("#charityName").val()
+    const userId = $("#userId").val()
     const charity = { name, userId }
     axios.post("/users/" + userId + "/charities/new", charity).then(function(res) {
         console.log(res.data)
@@ -136,29 +138,29 @@ function addToProfile(userId, name) {
 }
 
 function deleteCharity(index) {
-    
+
     const userId = document.getElementById("userLabel").getAttribute("user-id");
     const charityId = document.getElementById(index).getAttribute("charity-id");
-    
+
     axios.delete("/users/" + userId + "/charities/" + charityId).then(function(res) {
         window.location.replace("/")
     }).catch(e => { console.log(e) })
 }
 
 function updateCharity(index) {
-    
+
     const userId = document.getElementById("userLabel").getAttribute("user-id");
     const charityId = document.getElementById(index).getAttribute("charity-id");
     const name = $("#" + index + "-name").text()
     const amount = $("#" + index + "-amount").val()
     const charity = { name, amount, userId }
-    
+
     if(amount <= 0) {
         alert('Invalid Input')
         window.location.replace("/")
         return
     }
-    
+
     axios.put("/users/" + userId + "/charities/" + charityId, charity).then(function(res) {
         window.location.replace("/")
     }).catch(e => { console.log(e) })
@@ -178,23 +180,23 @@ function openDonationModal(id) {
         document.getElementById("addDonationModalTable").innerHTML = ''
         $("#addDonationModalLabel").text(res.data.charities.name + " - Donations")
         $("#addDonationModalForm").attr("onsubmit", "event.preventDefault();addDonation('" + charityId.slice(-8) + "')")
-        
+
         let donations = res.data.charities.donations
-        
+
         let table = $("<table>").appendTo("#addDonationModalTable")
         table.addClass("table")
-        
+
         let header = $("<thead />").appendTo(table)
         $("<th />", { text: "Amount" }).appendTo(header)
         $("<th />", { text: "Date" }).appendTo(header)
-        
+
         let tBody = $("<tbody />").appendTo(table)
         for(var i = 0; i < donations.length; i++) {
             let row = $("<tr />").appendTo(tBody)
             $("<td />", { text: prettyAmount(donations[i]['amount']) }).appendTo(row)
             $("<td />", { text: prettyDate(donations[i]['date']) }).appendTo(row)
         }
-        
+
          $("#addDonationModal").modal("show")
     })
 }
@@ -209,14 +211,14 @@ function addDonation(id) {
     axios.put('/users/' + userId + '/charities/' + charityId, addDonation).then(function(res) {
         if(!res.data.err) {
             $("#addDonationAmount").val("")
-            
+
             $("#addDonationModalTable tbody").append(`
                 <tr>
                     <td>${prettyAmount(amount)}</td>
                     <td>${prettyDate(date)}</td>
                 </tr>
             `)
-            
+
             const curAmount = Number($("#" + charityId.slice(-8) + "-amount").text().replace(/[^\d.-]/g, ''))
             const curTotal = Number($("#contributionsTotal").text().replace(/[^\d.-]/g, ''))
             const total = Number(amount)
